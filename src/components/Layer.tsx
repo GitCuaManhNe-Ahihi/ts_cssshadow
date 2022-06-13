@@ -8,20 +8,22 @@ const  Layer:React.FC = ()=> {
   useEffect(() => {
     setArr(state.layer === 1 ? state.arr1 : state.arr2)
   }, [state])
-  const start = useRef(0)
-  const postion = useRef(0)
+  const start = useRef<number>(0)
+  const postion = useRef<number>(0)
   const OnDragStart = (e:DragEvent<HTMLLIElement>) => {
-    start.current = e.target.id
+    const target  = e.target as HTMLLIElement
+    start.current = +target.id
     postion.current = e.clientY
   }
   const OnDragEnter = (e:DragEvent<HTMLLIElement>) => {
-    e.preventDefault()
-    e.target.style.border= '1px solid #000'
+    const target  = e.target as HTMLLIElement
+    e.preventDefault();
+   target.style.border= '1px solid #000';
     const data = { ...arr[start.current] }
-    if (e.target.id === start.current) {
+    if (+target.id === start.current) {
       return
     }
-    if (+e.target.id> start.current) {
+    if (+target.id> start.current) {
       let data2 = arr[+start.current + 1]
       setArr([...arr.slice(0, start.current), data2, data, ...arr.slice(+start.current + 2, arr.length)])
     }
@@ -32,11 +34,12 @@ const  Layer:React.FC = ()=> {
   }
   const OnDragLeave = (e:DragEvent<HTMLLIElement>) => {
     e.preventDefault()
-   e.target.style.border = 'none'
+    const target  = e.target as HTMLLIElement
+    target.style.border= '1px solid #000'
 
  }
  const OnDragEnd = (e:DragEvent<HTMLLIElement>) => {
-    console.log(e?.target?.id-1,+start.current)
+    const target  = e.target as HTMLLIElement
     if (postion.current > e.clientY) {
       dispatch({ type: 'move', payload: { arr, id: +start.current-1} })
     } else {
