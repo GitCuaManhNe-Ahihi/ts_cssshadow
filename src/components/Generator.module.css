@@ -1,0 +1,26 @@
+.containt{
+    width: 500px;
+    height: 500px;
+    box-shadow: black 0px 0px 10px;
+}
+.row{
+    display: block;
+    margin-top: 20px;
+    height: 30px;
+    width: 100%;
+    margin: 0 10px;
+    text-align: left;
+}
+
+.row p {
+    display: inline-block;
+    max-width: 200px;
+   
+}
+.insert{
+    display: flex;
+     width: 300px;
+    height: 30px;
+    justify-content: space-between;
+    
+}
